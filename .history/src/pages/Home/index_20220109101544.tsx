@@ -11,7 +11,6 @@ interface Product {
   title: string;
   price: number;
   image: string;
-  amount: number;
 }
 
 interface ProductFormatted extends Product {
@@ -39,22 +38,23 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     async function loadProducts() {
-      api.get("products").then((response) => {
-        setProducts(response.data)
-      });
+      console.log(api.get("products"));
+      api.get("products").then((response) => setProducts(response.data))
     }
     loadProducts();
+    console.log(products);
   }, []);
   function handleAddProduct(id: number) {
-    addProduct(id);
+    // TODO 
   }
+
   return (
     <ProductList>
-      {products.map((product) => (
-        <li  key={product.id}>
+      {cart.map((product) => (
+        <li>
           <img src={product.image} alt={product.title} />
           <strong>{product.title}</strong>
-          <span>{formatPrice(product.price)}</span>
+          <span>{formatPrice}</span>
           <button
             type="button"
             data-testid="add-product-button"
@@ -62,7 +62,7 @@ const Home = (): JSX.Element => {
           >
             <div data-testid="cart-product-quantity">
               <MdAddShoppingCart size={16} color="#FFF" />
-              {cartItemsAmount[product.id] || 0} 
+              {cartItemsAmount[product.id] || 0} 2
             </div>
 
             <span>ADICIONAR AO CARRINHO</span>

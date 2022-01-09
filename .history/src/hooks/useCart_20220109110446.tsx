@@ -36,8 +36,12 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     try {
 
       const response =  await api.get('/products/' + productId);
+      response.data = {
+        ...response.data,
+      }
+      const amountInCart = response.data.amount;
+      console.log(response.data.amount++);
       setCart([...cart,response.data]);
-      
     } catch {
       // TODO
     }

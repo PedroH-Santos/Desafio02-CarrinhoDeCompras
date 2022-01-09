@@ -23,6 +23,16 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
+  
+    useEffect(() => {
+      async function loadProducts() {
+  
+      }
+      
+      loadProducts();
+    }, []);
+    api.get("products").then((response) => setProducts(response.data.products))
+
     // const storagedCart = Buscar dados do localStorage
 
     // if (storagedCart) {
@@ -34,10 +44,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const addProduct = async (productId: number) => {
     try {
-
-      const response =  await api.get('/products/' + productId);
-      setCart([...cart,response.data]);
-      
+      // TODO
     } catch {
       // TODO
     }

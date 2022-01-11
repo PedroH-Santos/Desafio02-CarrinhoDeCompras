@@ -29,14 +29,10 @@ const Home = (): JSX.Element => {
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     let id = Number(product.id);
     let quantity = Number(product.amount);
-    let object = {
-      [id]: quantity,
-    }
-    sumAmount = object;
+    sumAmount[id] = quantity;
     return sumAmount;
 
   }, {} as CartItemsAmount)
-
   useEffect(() => {
     async function loadProducts() {
       api.get("products").then((response) => {
